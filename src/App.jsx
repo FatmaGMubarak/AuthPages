@@ -10,9 +10,9 @@ export default function App() {
       <Routes>
         <Route path="/" element={<PublicAuth />}>
           <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/login" element={<LogInPage />} />
+          <Route index path="/login" element={<LogInPage />} />
         </Route>
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route  path="/profile" element={<ProfilePage />} />
       </Routes>
     </HashRouter>
   );

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 export default function LogInPage() {
   const [email, setEmail] = useState("");
@@ -29,7 +29,9 @@ export default function LogInPage() {
   };
 
   return (
-    <div>
+    <>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 py-6">
+      <div className="bg-white shadow-md rounded-md p-8 w-96">
       <form
         className="max-w-sm mx-auto"
         onSubmit={(e) => {
@@ -74,11 +76,17 @@ export default function LogInPage() {
         </div>
         <button
           type="submit"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="mt-6 w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md shadow transition duration-300 ease-in-out transform hover:scale-105"
         >
           LogIN
         </button>
+        <a className="flex float-end mt-3">
+        New Here?<Link to={"/signup"} className="text-blue-500 hover:text-blue-600 transition duration-300 ease-in-out transform hover:scale-105 ml-1"> Sign UP</Link>
+        </a>
       </form>
-    </div>
+      </div>
+      </div>
+
+    </>
   );
 }

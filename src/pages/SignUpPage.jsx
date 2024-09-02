@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUpPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // State to handle errors
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const signUp = async () => {
@@ -17,13 +17,12 @@ export default function SignUpPage() {
         password,
       });
 
-      // If signup is successful, handle the response
       console.log("User signed up:", response.data);
-      navigate("/login"); // Redirect to login page after successful signup
+      navigate("/login");
     } catch (e) {
       console.error(e);
       if (e.response && e.response.data.msg) {
-        setError(e.response.data.msg); // Set the error message from the server
+        setError(e.response.data.msg);
       } else {
         setError("An unexpected error occurred. Please try again.");
       }
@@ -31,16 +30,18 @@ export default function SignUpPage() {
   };
 
   return (
-    <div>
+    <>
+          <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 py-6">
+          <div className="bg-white shadow-md rounded-md p-8 w-96">
       <form
-        className="max-w-sm mx-auto"
+        className="max-w-sm mx-auto "
         onSubmit={(e) => {
           e.preventDefault();
           signUp();
         }}
       >
         {error && (
-          <p className="text-red-500 mb-4 text-center">{error}</p> // Display error message
+          <p className="text-red-500 mb-4 text-center">{error}</p>
         )}
         <div className="mb-5">
           <label
@@ -92,11 +93,16 @@ export default function SignUpPage() {
         </div>
         <button
           type="submit"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="mt-3 w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md shadow transition duration-300 ease-in-out transform hover:scale-105"
         >
           Sign Up
         </button>
+        <a className="flex float-end mt-3">
+        Already Have An Account?<Link to={"/login"} className="text-blue-500 hover:text-blue-600 transition duration-300 ease-in-out transform hover:scale-105 ml-1"> Login</Link>
+        </a>
       </form>
-    </div>
+      </div>
+      </div>
+    </>
   );
 }
